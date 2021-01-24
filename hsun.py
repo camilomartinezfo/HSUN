@@ -120,11 +120,6 @@ inf.nuevo('Carrera', 8, 40)
 inf.progreso(8, 60)
 inf.promedio(8, 80)
 
-pap = 3.4
-papa = Label(informacion, text = "P.A.P.A: {}".format(pap)) 
-papa.place(x = 8, y = 100)
-papa.config(bg = 'snow')
-
 ##Acciones del usario
 inf.etiqueta(principal, "Ingrese la información para agregar \nuna nueva materia a su historia académica", 370, 75)
 
