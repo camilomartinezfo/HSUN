@@ -8,6 +8,7 @@ Created on Sat Jan 23 12:10:07 2021
 from tkinter import *
 from tkinter import ttk
 from ttkthemes import ThemedTk
+import os
 import sqlite3
 
 class inf():
@@ -92,7 +93,7 @@ def historial():
 
 #Escogiendo Tema de la app
 principal = ThemedTk(theme = 'plastik')
-principal.iconbitmap("C:/Users/User/Desktop/Papa/avance.ico")
+principal.iconbitmap(os.getcwd() + '/avance.ico')
 
 #Configurando ventana principal
 ventana = Frame(principal)
