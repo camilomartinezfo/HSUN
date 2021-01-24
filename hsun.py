@@ -50,7 +50,7 @@ class inf():
         if total != 0:
             prom = round(suma/total,2)
         else:
-            prom = "No Calculado"
+            prom = "N.A"
         pa = Label(informacion, text = "Promedio Académico: {}".format(prom))
         pa.place(x = posx, y = posy)
         pa.config(bg = 'snow')
@@ -111,18 +111,18 @@ etiqueta.config(bg='snow')
 ##Cuadro de resumen
 #Configuración
 informacion = Frame(principal)
-informacion.config(bg = 'snow', width = '208', height = '285', relief = 'ridge', bd = 1)
+informacion.config(bg = 'snow', width = '200', height = '285', relief = 'ridge', bd = 1)
 informacion.place(x = 5, y = 50)
 
 #Información 
-inf.nuevo('Nombre', 5, 20)
-inf.nuevo('Carrera', 5, 40)
-inf.progreso(5, 60)
-inf.promedio(5, 80)
+inf.nuevo('Nombre', 8, 20)
+inf.nuevo('Carrera', 8, 40)
+inf.progreso(8, 60)
+inf.promedio(8, 80)
 
 pap = 3.4
 papa = Label(informacion, text = "P.A.P.A: {}".format(pap)) 
-papa.place(x = 5, y = 100)
+papa.place(x = 8, y = 100)
 papa.config(bg = 'snow')
 
 ##Acciones del usario
