@@ -23,7 +23,7 @@ class inf():
     
     def progreso(posx, posy):
         total = inf.cursor.execute("SELECT Creditos FROM registro").fetchall()[0][0]
-        prog = inf.cursor.execute("SELECT Creditos FROM historia").fetchall()
+        prog = inf.cursor.execute("SELECT Creditos FROM historia WHERE Calificacion >= 3.0").fetchall()
         suma = 0
         for credito in prog:
             suma += credito[0]
@@ -55,6 +55,21 @@ class inf():
         pa = Label(informacion, text = "Promedio Académico: {}".format(prom))
         pa.place(x = posx, y = posy)
         pa.config(bg = 'snow')
+
+    def papa(posx, posy):
+        resultado = inf.cursor.execute("SELECT Creditos, Calificacion FROM historia").fetchall()
+        suma = 0
+        total = 0
+        for materia in resultado:
+            suma += materia[0] * materia[1]
+            total += materia[0]
+        if total != 0:
+            prom = round(suma/total,1)
+        else:
+            prom = "N.A"
+        pa = Label(informacion, text = "P.A.P.A: {}".format(prom))
+        pa.place(x = posx, y = posy)
+        pa.config(bg = 'snow')
         
 def agregar():
     clase = materia.get()
@@ -70,6 +85,7 @@ def agregar():
     materia.focus()
     inf.progreso(8, 60)
     inf.promedio(8, 80)
+    inf.papa(8, 100)
     
 def borrar():
     id = eliminar.get()
@@ -79,7 +95,8 @@ def borrar():
     bd.commit()
     eliminar.delete(0, END)
     inf.progreso(8, 60)
-    inf.promedio(8, 80)  
+    inf.promedio(8, 80)
+    inf.papa(8, 100)  
     eliminar.focus()
 
 def historial():
@@ -120,6 +137,7 @@ inf.nuevo('Nombre', 8, 20)
 inf.nuevo('Carrera', 8, 40)
 inf.progreso(8, 60)
 inf.promedio(8, 80)
+inf.papa(8, 100)
 
 ##Acciones del usario
 inf.etiqueta(principal, "Ingrese la información para agregar \nuna nueva materia a su historia académica", 370, 75)
