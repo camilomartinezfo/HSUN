@@ -116,7 +116,7 @@ def historial():
     resumen.column("dos", width=230, minwidth=80)
     resumen.column("tres", width=120, minwidth=50)
     resumen.heading("uno", text="ID")
-    resumen.heading("dos", text="NOMBRE")
+    resumen.heading("dos", text="MATERIA")
     resumen.heading("tres", text="CALIFICACIÓN")
     bd = sqlite3.connect('bd.db')
     cursor = bd.cursor()
