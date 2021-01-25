@@ -108,7 +108,7 @@ def historial():
     scrollbar = Scrollbar(tabla)
     scrollbar.pack(side = RIGHT, fill = Y) 
     resumen = ttk.Treeview(tabla, yscrollcommand = scrollbar.set)
-    resumen.pack()
+    resumen.pack(fill = 'both', expand = True)
     scrollbar.config(command = resumen.yview )
     resumen["columns"] = ("uno", "dos", "tres")
     resumen.column("#0", width=10, minwidth=20)
@@ -184,4 +184,5 @@ inf.boton("Eliminar", 302, 276, comando = borrar)
 #Historial Académico
 inf.boton("Historial Académico", 400, 300, historial)
 
+principal.resizable(0,0)
 principal.mainloop()
