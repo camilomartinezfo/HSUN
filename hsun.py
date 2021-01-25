@@ -42,7 +42,7 @@ class inf():
         titulo.config(bg = fondo, fg = letra)
         
     def promedio(posx, posy):
-        resultado = inf.cursor.execute("SELECT Creditos, Calificacion FROM historia WHERE Calificacion > 3.0").fetchall()
+        resultado = inf.cursor.execute("SELECT Creditos, Calificacion FROM historia WHERE Calificacion >= 3.0").fetchall()
         suma = 0
         total = 0
         for materia in resultado:
