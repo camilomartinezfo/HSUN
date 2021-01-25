@@ -10,6 +10,7 @@ from tkinter import ttk
 from ttkthemes import ThemedTk
 import os
 import sqlite3
+import platform
 
 class inf():
     bd = sqlite3.connect('bd.db')
@@ -101,7 +102,10 @@ def borrar():
 
 def historial():
     tabla = ThemedTk(theme = 'plastik')
-    tabla.iconbitmap(os.getcwd() + '/avance.ico')
+    if platform.system() == "Windows":
+        tabla.iconbitmap(os.getcwd() + '\\avance.ico')
+    elif platform.system() == "Linux":
+        tabla.iconbitmap(os.getcwd() + '/avance.ico')
     tabla.title('Historial Académico')
     ventana = Frame(tabla)
     ventana.config(width = '390', height = '80')
@@ -127,7 +131,10 @@ def historial():
 
 #Escogiendo Tema de la app
 principal = ThemedTk(theme = 'plastik')
-principal.iconbitmap(os.getcwd() + '/avance.ico')
+if platform.system() == "Windows":
+    principal.iconbitmap(os.getcwd() + '\\avance.ico')
+elif platform.system() == "Linux":
+    principal.iconbitmap(os.getcwd() + '/avance.ico')
 
 #Configurando ventana principal
 ventana = Frame(principal)
