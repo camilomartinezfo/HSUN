@@ -100,13 +100,30 @@ def borrar():
     eliminar.focus()
 
 def historial():
+    tabla = ThemedTk(theme = 'plastik')
+    tabla.iconbitmap(os.getcwd() + '/avance.ico')
+    tabla.title('Historial Académico')
+    ventana = Frame(tabla)
+    ventana.config(width = '390', height = '80')
+    scrollbar = Scrollbar(tabla)
+    scrollbar.pack(side = RIGHT, fill = Y) 
+    resumen = ttk.Treeview(tabla, yscrollcommand = scrollbar.set)
+    resumen.pack()
+    scrollbar.config(command = resumen.yview )
+    resumen["columns"] = ("uno", "dos", "tres")
+    resumen.column("#0", width=10, minwidth=20)
+    resumen.column("uno", width=50, minwidth=50)
+    resumen.column("dos", width=230, minwidth=80)
+    resumen.column("tres", width=120, minwidth=50)
+    resumen.heading("uno", text="ID")
+    resumen.heading("dos", text="NOMBRE")
+    resumen.heading("tres", text="CALIFICACIÓN")
     bd = sqlite3.connect('bd.db')
     cursor = bd.cursor()
     materias = cursor.execute("SELECT id, Nombre, Calificacion FROM historia").fetchall()
-    resultado = ''
     for materia in materias:
-        resultado += 'id: ' +  str(materia[0]) + ' | Nombre: ' + materia[1] + ' | Calificación: ' + str(materia[2]) +'\n'
-    messagebox.showinfo('Historial Académico', resultado)
+        resumen.insert("", END, values=(materia))
+    tabla.mainloop()
 
 #Escogiendo Tema de la app
 principal = ThemedTk(theme = 'plastik')
