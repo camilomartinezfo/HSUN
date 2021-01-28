@@ -13,8 +13,6 @@ import sqlite3
 import platform
 import os
 
-#### Recordar crear las tablas en la bd de datos si no están ####
-
 bd = sqlite3.connect('bd.db')
 cursor = bd.cursor()
 tablas = cursor.execute('SELECT name from sqlite_master where type= "table"').fetchall()
