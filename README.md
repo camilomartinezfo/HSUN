@@ -5,3 +5,5 @@
  
  Primero se debe descargar la carpeta y guardarlo en el directorio que desee, posteriormente abrir hsun.exe y listo! 
  Ya puedes empezar a seguir tu progreso universitario.
+
+![](https://github.com/jsmendozap/HSUN/blob/main/hsun.gif)
