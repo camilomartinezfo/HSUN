@@ -12,6 +12,8 @@ from ttkthemes import ThemedTk
 import sqlite3
 import platform
 import os
+from PIL import Image
+from PIL import ImageTk
 
 bd = sqlite3.connect('bd.db')
 cursor = bd.cursor()
@@ -125,7 +127,39 @@ class inf():
         else:
             prom = "N.A"
         return prom
-        
+
+def tramosImg(x):
+    im_logo = Image.open("1-256x256.png") 
+    im_fin = Image.open("2-256x256.png")
+    imgorro = Image.open("gorroesc.png")
+    img = Image.open("New.png")
+    if x < 20:
+        img.paste(im_logo,(20, 335))
+    elif x < 100:
+        img.paste(im_logo,(x,round(385 - (0.4375*x + 41.25))))
+    elif x < 185:
+        img.paste(im_logo,(x,round(385 - (1.058823*x - 20.88))))        
+    elif x < 255:
+        img.paste(im_logo,(x,round(385 - (0.7857*x + 29.6429))))        
+    elif x < 405:
+        img.paste(im_logo,(x,round(385 - (0.3667*x + 136.5))))        
+    elif x < 449:
+        img.paste(im_logo,(x,round(385 - (1.55*x - 342.75))))        
+    elif x < 480:      
+        img.paste(im_fin,(470, 25))
+        img.paste(imgorro,(470,12))
+    img.save('image.png')                           
+
+def Rescala(x):
+    return round(4.293*x + 20)
+
+def logoGrafico(x):
+    xvalue = Rescala(x)
+    tramosImg(xvalue)
+    Img = Image.open("image.png")
+    ImgMod = Img.resize((190,150))
+    ImgMod.save("image.png","png")
+
 def agregar():
     clase = materia.get()
     cal = nota.get()
@@ -139,8 +173,11 @@ def agregar():
     avance['text'] = "Progreso: {}%".format(inf.progreso())
     promedio['text'] = "Promedio Académico: {}".format(inf.promedio())
     papa['text'] = "P.A.P.A: {}".format(inf.papa())
+    logoGrafico(inf.progreso())
+    im = ImageTk.PhotoImage(Image.open(ruta))
+    panel.configure(image = im)
+    panel.image = im
 
-    
 def borrar():
     id = eliminar.get()
     cursor.execute("DELETE FROM historia WHERE id = ?", (id,))
@@ -150,6 +187,10 @@ def borrar():
     promedio['text'] = "Promedio Académico: {}".format(inf.promedio())
     papa['text'] = "P.A.P.A: {}".format(inf.papa())
     eliminar.focus()
+    logoGrafico(inf.progreso())
+    im = ImageTk.PhotoImage(Image.open(ruta))
+    panel.configure(image = im)
+    panel.image = im
 
 def historial():
     tabla = ThemedTk(theme = 'plastik')
@@ -222,6 +263,19 @@ promedio.config(bg = 'snow')
 papa = Label(informacion, text = "P.A.P.A: {}".format(inf.papa())) 
 papa.place(x = 8, y = 100)
 papa.config(bg = 'snow')
+
+#Grafico
+logoGrafico(inf.progreso())
+
+if platform.system() == 'Windows':
+    ruta = os.getcwd() + '\\image.png'
+else:
+    ruta = os.getcwd() + '/image.png'
+im = ImageTk.PhotoImage(file = ruta)
+panel = Label(informacion, image = im)
+panel.pack()
+panel.config(relief = 'flat', bd = 0)
+panel.place(x = 3, y = 130)
 
 ##Acciones del usario
 inf.etiqueta(principal, "Ingrese la información para agregar \nuna nueva materia a su historia académica", 370, 75)
